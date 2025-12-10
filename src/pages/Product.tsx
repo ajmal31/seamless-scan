@@ -68,19 +68,88 @@ export default function Product() {
                 <Link to="/contact">Get Started <ArrowRight className="ml-2 h-5 w-5" /></Link>
               </Button>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative"
             >
-              <img 
-                src={productFlowImage} 
-                alt="WebGro Product Flow Diagram" 
+              <img
+                src={productFlowImage}
+                alt="WebGro Product Flow Diagram"
                 className="w-full rounded-2xl shadow-elevated"
               />
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section id="features" className="py-20 lg:py-28 bg-secondary/30">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center max-w-3xl mx-auto mb-16"
+          >
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+              Powerful <span className="text-gradient">Features</span>
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Everything you need to run a modern, efficient food court operation.
+            </p>
+          </motion.div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {[
+              {
+                icon: QrCode,
+                title: "QR-Based Ordering",
+                description: "No app downloads required. Customers scan and order instantly from their phone browser."
+              },
+              {
+                icon: Smartphone,
+                title: "Multi-Restaurant Cart",
+                description: "Order from multiple restaurants in one transaction with unified checkout."
+              },
+              {
+                icon: Bell,
+                title: "Real-Time Tracking",
+                description: "Live order status updates keep customers informed every step of the way."
+              },
+              {
+                icon: CreditCard,
+                title: "Secure Payments",
+                description: "Integrated payment gateway with UPI, cards, and wallet support."
+              },
+              {
+                icon: RefreshCw,
+                title: "POS Integration",
+                description: "Seamless sync with PetPooja for automated menu and order management."
+              },
+              {
+                icon: Settings,
+                title: "Admin Dashboard",
+                description: "Comprehensive analytics and controls for food court operators."
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="p-6 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300"
+              >
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                  <feature.icon className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="font-semibold mb-2">{feature.title}</h3>
+                <p className="text-sm text-muted-foreground">{feature.description}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -104,7 +173,7 @@ export default function Product() {
 
           <div className="relative">
             <div className="hidden lg:block absolute top-24 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-            
+
             <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-8">
               {userFlowSteps.map((step, index) => (
                 <motion.div
@@ -145,7 +214,7 @@ export default function Product() {
               <p className="text-lg text-muted-foreground mb-8">
                 Orders flow seamlessly from customer phones to kitchen displays without any manual intervention.
               </p>
-              
+
               <div className="space-y-4">
                 {restaurantFlowSteps.map((step, index) => (
                   <motion.div
@@ -167,7 +236,7 @@ export default function Product() {
                 ))}
               </div>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -175,9 +244,9 @@ export default function Product() {
               className="relative"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-3xl" />
-              <img 
-                src={appMockup} 
-                alt="Restaurant Order Management Interface" 
+              <img
+                src={appMockup}
+                alt="Restaurant Order Management Interface"
                 className="relative w-full max-w-md mx-auto"
               />
             </motion.div>
@@ -242,7 +311,7 @@ export default function Product() {
               <p className="text-lg text-muted-foreground mb-8">
                 Food courts earn a sustainable revenue stream through our transparent platform fee structure. No upfront costs, just pure value creation.
               </p>
-              
+
               <ul className="space-y-4 mb-8">
                 {platformFeeDetails.map((item, index) => (
                   <motion.li
@@ -260,12 +329,12 @@ export default function Product() {
                   </motion.li>
                 ))}
               </ul>
-              
+
               <Button variant="hero" size="lg" asChild>
                 <Link to="/contact">Discuss Pricing <ArrowRight className="ml-2 h-5 w-5" /></Link>
               </Button>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}

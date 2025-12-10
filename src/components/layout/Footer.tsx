@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Mail, Phone, MapPin, Linkedin, Twitter, Instagram, Facebook } from "lucide-react";
 import logo from "@/assets/webgro-logo.png";
 
@@ -30,7 +30,37 @@ const socialLinks = [
   { icon: Facebook, href: "#", label: "Facebook" },
 ];
 
+const email = "contact@webgro.in";
+const phone = "+91 97460 08581";
+const address = "Koci, Keala";
+
 export function Footer() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleFooterLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+    if (path.includes("#")) {
+      e.preventDefault();
+      const [pathname, hash] = path.split("#");
+
+      if (location.pathname === pathname) {
+        // Already on the page, just scroll
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      } else {
+        // Navigate first, then scroll
+        navigate(pathname);
+        setTimeout(() => {
+          const element = document.getElementById(hash);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 100);
+      }
+    }
+  };
   return (
     <footer className="bg-secondary/50 border-t border-border">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
@@ -41,21 +71,21 @@ export function Footer() {
               <img src={logo} alt="WebGro" className="h-10 w-auto" />
             </Link>
             <p className="mt-4 text-muted-foreground text-sm leading-relaxed max-w-sm">
-              Revolutionizing food court ordering with a unified QR-based digital platform. 
+              Revolutionizing food court ordering with a unified QR-based digital platform.
               Scan once, order from any restaurant.
             </p>
             <div className="mt-6 space-y-3">
-              <a href="mailto:hello@webgro.in" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+              <a href={`mailto:${email}`} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
                 <Mail className="h-4 w-4" />
-                hello@webgro.in
+                {email}
               </a>
-              <a href="tel:+919876543210" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+              <a href={`tel:${phone}`} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
                 <Phone className="h-4 w-4" />
-                +91 98765 43210
+                {phone}
               </a>
               <div className="flex items-start gap-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4 mt-0.5 shrink-0" />
-                <span>Bangalore, India</span>
+                <span>{address}</span>
               </div>
             </div>
           </div>
@@ -66,7 +96,11 @@ export function Footer() {
             <ul className="space-y-3">
               {footerLinks.product.map((link) => (
                 <li key={link.name}>
-                  <Link to={link.path} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  <Link
+                    to={link.path}
+                    onClick={(e) => handleFooterLinkClick(e, link.path)}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
                     {link.name}
                   </Link>
                 </li>
@@ -80,7 +114,11 @@ export function Footer() {
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
-                  <Link to={link.path} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  <Link
+                    to={link.path}
+                    onClick={(e) => handleFooterLinkClick(e, link.path)}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
                     {link.name}
                   </Link>
                 </li>
@@ -94,7 +132,11 @@ export function Footer() {
             <ul className="space-y-3">
               {footerLinks.support.map((link) => (
                 <li key={link.name}>
-                  <Link to={link.path} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  <Link
+                    to={link.path}
+                    onClick={(e) => handleFooterLinkClick(e, link.path)}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
                     {link.name}
                   </Link>
                 </li>

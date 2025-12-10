@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import React from "react";
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -19,20 +20,52 @@ export default function Contact() {
   });
   const { toast } = useToast();
 
+  // Web3Forms access key - Replace with your own from https://web3forms.com
+  const WEB3FORMS_ACCESS_KEY = "123";
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    toast({
-      title: "Message sent successfully!",
-      description: "We'll get back to you within 24 hours.",
-    });
-    
-    setFormData({ name: "", email: "", phone: "", company: "", message: "" });
-    setIsSubmitting(false);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          company: formData.company,
+          message: formData.message,
+          subject: `New Contact Form Submission from ${formData.name}`,
+          from_name: "WebGro Contact Form",
+        })
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        toast({
+          title: "Message sent successfully!",
+          description: "We'll get back to you within 24 hours.",
+        });
+        setFormData({ name: "", email: "", phone: "", company: "", message: "" });
+      } else {
+        throw new Error(result.message || "Something went wrong");
+      }
+    } catch (error) {
+      toast({
+        title: "Failed to send message",
+        description: "Please try again or email us directly at contact@webgro.in",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -108,7 +141,7 @@ export default function Contact() {
                     />
                   </div>
                 </div>
-                
+
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="phone">Phone Number</Label>
@@ -134,7 +167,7 @@ export default function Contact() {
                     />
                   </div>
                 </div>
-                
+
                 <div className="space-y-2">
                   <Label htmlFor="message">Your Message *</Label>
                   <Textarea
@@ -148,7 +181,7 @@ export default function Contact() {
                     className="resize-none"
                   />
                 </div>
-                
+
                 <Button type="submit" variant="hero" size="lg" disabled={isSubmitting} className="w-full sm:w-auto">
                   {isSubmitting ? (
                     <>Sending...</>
@@ -177,8 +210,8 @@ export default function Contact() {
 
               {/* Contact Cards */}
               <div className="space-y-4">
-                <a 
-                  href="mailto:hello@webgro.in"
+                <a
+                  href="mailto:contact@webgro.in"
                   className="flex items-start gap-4 p-5 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300"
                 >
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -186,13 +219,13 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Email Us</h3>
-                    <p className="text-primary font-medium">hello@webgro.in</p>
+                    <p className="text-primary font-medium">contact@webgro.in</p>
                     <p className="text-sm text-muted-foreground">We respond within 24 hours</p>
                   </div>
                 </a>
 
-                <a 
-                  href="tel:+919876543210"
+                <a
+                  href="tel:+919746008581"
                   className="flex items-start gap-4 p-5 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300"
                 >
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -200,13 +233,13 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Call Us</h3>
-                    <p className="text-primary font-medium">+91 98765 43210</p>
+                    <p className="text-primary font-medium">+91 97460 08581</p>
                     <p className="text-sm text-muted-foreground">Mon-Fri, 9am-6pm IST</p>
                   </div>
                 </a>
 
-                <a 
-                  href="https://wa.me/919876543210"
+                <a
+                  href="https://wa.me/9746008581"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-start gap-4 p-5 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300"
@@ -216,24 +249,25 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">WhatsApp</h3>
-                    <p className="text-primary font-medium">+91 98765 43210</p>
+                    <p className="text-primary font-medium">+91 97460 08581</p>
                     <p className="text-sm text-muted-foreground">Quick responses during business hours</p>
                   </div>
                 </a>
 
-                <div className="flex items-start gap-4 p-5 rounded-2xl bg-card border border-border">
+                <a
+                  href="https://maps.app.goo.gl/Ht56X9tPVoL4oFCX8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-4 p-5 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300"
+                >
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
                     <MapPin className="h-6 w-6 text-primary" />
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Visit Us</h3>
-                    <p className="text-muted-foreground">
-                      123 Tech Park, HSR Layout<br />
-                      Bangalore, Karnataka 560102<br />
-                      India
-                    </p>
+                    <p className="text-primary font-medium">Kochi, Kerala, India</p>
                   </div>
-                </div>
+                </a>
               </div>
 
               {/* Schedule Demo CTA */}
@@ -245,7 +279,19 @@ export default function Contact() {
                 <p className="text-primary-foreground/80 mb-4">
                   See WebGro in action with a personalized walkthrough from our team.
                 </p>
-                <Button size="lg" className="bg-background text-primary hover:bg-background/90 w-full">
+                <Button
+                  size="lg"
+                  className="bg-background text-primary hover:bg-background/90 w-full"
+                  onClick={() => {
+                    const messageField = document.getElementById('message') as HTMLTextAreaElement;
+                    if (messageField) {
+                      messageField.value = "Hi, I would like to schedule a demo for WebGro. Please contact me to arrange a suitable time.";
+                      messageField.focus();
+                      setFormData(prev => ({ ...prev, message: "Hi, I would like to schedule a demo for WebGro. Please contact me to arrange a suitable time." }));
+                    }
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                >
                   Book Demo <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </div>
@@ -267,7 +313,7 @@ export default function Contact() {
               Find Us on the <span className="text-gradient">Map</span>
             </h2>
             <p className="text-muted-foreground">
-              Located in the heart of Bangalore's tech corridor.
+              Located in Kochi, Kerala - India's emerging tech hub.
             </p>
           </motion.div>
 
@@ -277,15 +323,16 @@ export default function Contact() {
             viewport={{ once: true }}
             className="rounded-2xl overflow-hidden shadow-elevated border border-border"
           >
-            <div className="aspect-video bg-muted flex items-center justify-center">
-              <div className="text-center p-8">
-                <MapPin className="h-16 w-16 text-primary/30 mx-auto mb-4" />
-                <p className="text-muted-foreground">
-                  Google Maps embed placeholder<br />
-                  <span className="text-sm">123 Tech Park, HSR Layout, Bangalore</span>
-                </p>
-              </div>
-            </div>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d251482.45840498727!2d76.13786052578124!3d9.982669600000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080d514abec6bf%3A0xbd582caa5844192!2sKochi%2C%20Kerala!5e0!3m2!1sen!2sin!4v1702223456789!5m2!1sen!2sin"
+              width="100%"
+              height="450"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="WebGro Location - Kochi, Kerala"
+            />
           </motion.div>
         </div>
       </section>

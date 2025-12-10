@@ -151,6 +151,7 @@
   
   .bg-gradient-glow {
     background-image: var(--gradient-glow);
+    pointer-events: none;
   }
   
   .shadow-glow {

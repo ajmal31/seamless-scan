@@ -86,7 +86,7 @@ export default function Home() {
       {/* SEO */}
       <title>WebGro - One QR for the Entire Food Court | Digital Ordering Platform</title>
       <meta name="description" content="WebGro is a QR-based digital ordering platform for food courts. Customers scan once, browse all restaurants, order, pay, and track in real time." />
-      
+
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-hero">
         <div className="absolute inset-0 bg-gradient-glow opacity-50" />
@@ -102,16 +102,16 @@ export default function Home() {
                 <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
                 Trusted by 50+ Food Courts
               </motion.div>
-              
+
               <motion.h1 variants={fadeInUp} className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
                 One QR for the{" "}
                 <span className="text-gradient">Entire Food Court</span>
               </motion.h1>
-              
+
               <motion.p variants={fadeInUp} className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-xl mx-auto lg:mx-0">
                 Customers scan once, browse all restaurants, order, pay, and track in real time. No apps. No hassle.
               </motion.p>
-              
+
               <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <Button variant="hero" size="xl" asChild>
                   <Link to="/contact">
@@ -122,7 +122,7 @@ export default function Home() {
                   <Link to="/contact">Contact Us</Link>
                 </Button>
               </motion.div>
-              
+
               <motion.div variants={fadeInUp} className="mt-10 flex flex-wrap items-center gap-6 justify-center lg:justify-start">
                 <div className="flex -space-x-3">
                   {[1, 2, 3, 4].map((i) => (
@@ -136,7 +136,7 @@ export default function Home() {
                 </div>
               </motion.div>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -144,9 +144,9 @@ export default function Home() {
               className="relative"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-green-500/20 rounded-3xl blur-3xl" />
-              <img 
-                src={heroImage} 
-                alt="WebGro Food Court Digital Ordering Platform" 
+              <img
+                src={heroImage}
+                alt="WebGro Food Court Digital Ordering Platform"
                 className="relative w-full rounded-2xl shadow-elevated"
               />
             </motion.div>
@@ -180,9 +180,9 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative group"
+                className="relative group h-full"
               >
-                <div className="p-8 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300">
+                <div className="p-8 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300 h-full min-h-[200px]">
                   <div className="text-6xl font-bold text-primary/10 mb-4 group-hover:text-primary/20 transition-colors">
                     {item.step}
                   </div>
@@ -216,7 +216,7 @@ export default function Home() {
               <p className="text-lg text-muted-foreground mb-8">
                 Every feature is designed to enhance customer experience while maximizing operational efficiency for food court operators.
               </p>
-              
+
               <div className="space-y-6">
                 {features.map((feature, index) => (
                   <motion.div
@@ -238,7 +238,7 @@ export default function Home() {
                 ))}
               </div>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -247,9 +247,9 @@ export default function Home() {
               className="relative"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-3xl" />
-              <img 
-                src={appMockup} 
-                alt="WebGro Mobile App Interface" 
+              <img
+                src={appMockup}
+                alt="WebGro Mobile App Interface"
                 className="relative w-full max-w-md mx-auto"
               />
             </motion.div>
@@ -278,7 +278,7 @@ export default function Home() {
                 ))}
               </div>
             </div>
-            
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -364,7 +364,7 @@ export default function Home() {
               <Button size="xl" className="bg-background text-primary hover:bg-background/90" asChild>
                 <Link to="/contact">Request Demo</Link>
               </Button>
-              <Button size="xl" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10" asChild>
+              <Button size="xl" variant="outline" className="border-primary-foreground/50 bg-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/30" asChild>
                 <Link to="/contact">Contact Sales</Link>
               </Button>
             </div>
